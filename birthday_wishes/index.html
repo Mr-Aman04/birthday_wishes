@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        const countdown = () => {
+          const birthday = new Date('2024-06-24T00:00:00').getTime();
+          const now = new Date().getTime();
+          const distance = birthday - now;
+
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          document.getElementById('countdown').innerHTML =
+            `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+          if (distance < 0) {
+            clearInterval(interval);
+            document.getElementById('countdown').innerHTML = '';
+            document.getElementById('advance-message').style.display = 'none';
+            document.getElementById('birthday-message').innerHTML = 'HAPPY BIRTHDAY TO YOU!';
+          }
+        };
+
+        const interval = setInterval(countdown, 1000);
+      });
+    </script>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: auto; /* Allow scrolling */
+      }
+      .video-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -1;
+        object-fit: cover;
+      }
+      .content {
+        position: relative;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <video class="video-bg" autoplay loop muted>
+      <source src="assets/video.mp4" type="video/mp4">
+     
+    </video>
+    <audio autoplay loop>
+      <source src="assets/audio.mpeg" type="audio/mpeg">
+      
+    </audio>
+    <div class="content flex flex-col items-center text-center p-4 md:p-8 lg:p-12">
+      <div class="bg-blue-100 dark:bg-zinc-700 p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-blue-900 dark:text-white mb-4">
+          "Celebrating You, Uncle!"
+        </h1>
+        <img src="assets/pic.jpg" alt="balloons" width="300" height="300" class="mx-auto mb-6 rounded-full" />
+        <div id="advance-message" class="text-lg md:text-xl lg:text-2xl font-bold text-blue-700 dark:text-blue-300 mb-4">Happy Birthday in Advance!</div>
+        <div id="countdown" class="text-lg md:text-xl lg:text-2xl font-bold text-blue-700 dark:text-blue-300 mb-4"></div>
+        <div id="birthday-message" class="text-lg md:text-xl lg:text-2xl font-bold text-blue-700 dark:text-blue-300 mb-4"></div>
+        <div class="border-t-2 border-dotted border-blue-300 dark:border-zinc-600 my-6"></div>
+        <h4 class="text-lg md:text-xl lg:text-2xl font-bold text-blue-700 dark:text-blue-300 mb-2">
+          Wishing you a wonderful day!
+        </h4>
+        <p class="text-sm md:text-base lg:text-lg text-zinc-700 dark:text-zinc-300 mb-6">
+          Happy Birthday to my incredible uncle! Another year older and another year wiser. 
+          May this milestone bring you happiness, good health, and all the blessings life can offer.
+        </p>
+        <p class="text-sm md:text-base lg:text-lg text-zinc-700 dark:text-zinc-300">
+          Best wishes,<br />
+          <span class="font-bold">Aman Patel & his family.</span>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
